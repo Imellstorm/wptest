@@ -167,8 +167,6 @@ class Island_trade_API
 
     /**
      * Check permissions for the endpoint. (Always true in our case)
-     *
-     * @param WP_REST_Request $request Current request.
      */
     public function get_permissions_check() 
     {
@@ -177,8 +175,6 @@ class Island_trade_API
 
     /**
      * Get users list
-     *
-     * @param WP_REST_Request $request Current request.
      */
     public function get_users() 
     {
@@ -613,7 +609,7 @@ class Island_trade_API
             //Check if trade user already has bid item
             foreach( $trade_user_items_data['trade_items'] as $key => $trade_user_item )
             {
-                if( $bid_item['name'] == $trade_user_item['name'] )
+                if( strtolower( $bid_item['name'] ) == strtolower( $trade_user_item['name'] ) )
                 {
                     $trade_user_items_data['trade_items'][$key]['count']+= $bid_item['count'];
 
@@ -669,8 +665,6 @@ class Island_trade_API
         return (json_last_error() === JSON_ERROR_NONE);
     }
 }
-
-$Island_trade_API = new Island_trade_API();
 
 /**
  * Function to register our routes from the controller.
